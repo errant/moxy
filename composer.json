@@ -1,0 +1,23 @@
+{
+    "name": "errant/moxy",
+    "description": "A lightwreight MVC-like PHP framework",
+    "keywords": ["framework", "web", "mvc"],
+    "homepage": "http://github.com/errant/moxy",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tom Morton",
+            "email": "tom@errant.me.uk",
+            "homepage": "http://errant.me.uk"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "monolog/monolog": "1.8.*",
+        "klein/klein": "2.0.x"
+    },
+    "autoload": {
+        "psr-4": {"Moxy\\": "src"}
+    }
+}
