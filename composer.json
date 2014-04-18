@@ -1,6 +1,6 @@
 {
     "name": "errant/moxy",
-    "description": "A lightwreight MVC-like PHP framework",
+    "description": "A lightweight MVC-like PHP framework",
     "keywords": ["framework", "web", "mvc"],
     "homepage": "http://github.com/errant/moxy",
     "type": "library",
