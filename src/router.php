@@ -6,10 +6,10 @@ class Router implements \Moxy\Interfaces\Service {
     protected static $router;
     protected $middleware = array();
 
-    public static function create()
+    public static function create($container)
     {
         if(!self::$router) {
-            self::$router = new \Klien\Klien;
+            self::$router = new \Klein\Klein;
         }
         return self::$router;
     }
