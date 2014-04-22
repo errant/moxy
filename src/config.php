@@ -1,7 +1,7 @@
 <?php
 namespace Moxy;
 
-class Config implements \ArrayAccess {
+class Config extends Patterns\Observer implements \ArrayAccess {
 
     public $config = array();
 

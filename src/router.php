@@ -1,22 +1,17 @@
 <?php
 namespace Moxy;
+/**
+ * Extends the Klien Router to implement Middleware
+ *
+ * @author  Tom Morton <tom@errant.me.uk>
+ */
+class Router extends \Klein\Klein implements Interfaces\Service {
 
-class Router implements \Moxy\Interfaces\Service {
-
-    protected static $router;
     protected $middleware = array();
 
     public static function create($container)
     {
-        if(!self::$router) {
-            self::$router = new \Klein\Klein;
-        }
-        return self::$router;
-    }
-
-    public function respond($HTTPMethod, $route, $callable) 
-    {
-        self::$router->response($HTTPMethod, $route, $callable);
+        return new self;
     }
 
     public function dispatch()
@@ -26,7 +21,7 @@ class Router implements \Moxy\Interfaces\Service {
                 return;
             }
         }
-        self::$router->dispatch();
+        parent::dispatch();
     }
 
     public function applyMiddleware($middleware)

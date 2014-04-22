@@ -1,7 +1,7 @@
 <?
 namespace Moxy;
 
-class Middleware {
+abstract class Middleware {
 
     protected static $application;
 
