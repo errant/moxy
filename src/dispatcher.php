@@ -4,10 +4,12 @@ namespace Moxy;
 class Dispatcher {
 
     protected $namespace;
+    protected $container;
 
-    public function __construct($namespace)
+    public function __construct($namespace, $container)
     {
         $this->namespace = $namespace;
+        $this->container = $container;
     }
 
     private function constructAction($request) 
@@ -18,18 +20,18 @@ class Dispatcher {
     public function controllerRoute($request,$response) 
     {
         $controllerClass = $this->namespace . '\\Controllers\\' . ucfirst($request->controller);
-        
+
         if(!class_exists($controllerClass)) {
             $controllerClass = '\Moxy\Controller\Error';
             $action = 'code404';
         }
 
-        $controller = new $controllerClass($request,$response);
+        $controller = new $controllerClass($request,$response,$this->container);
 
         $action = $this->constructAction($request);
 
         if(!method_exists($controller,$action)) {
-            $controller = new \Moxy\Controller\Error($request,$response);
+            $controller = new \Moxy\Controller\Error($request,$response,$this->container);
             $action = 'code404';
         }
 

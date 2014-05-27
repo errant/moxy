@@ -12,6 +12,7 @@ class Moxy extends Container {
 
     public function __construct()
     {
+        parent::__construct();
         // Inject self into the Middleware object
         \Moxy\Middleware::setApplication($this);
         // Fix Observer ID to moxy

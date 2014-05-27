@@ -26,7 +26,7 @@ class Field {
         $this->value = $value;
     }
 
-    public function retrieve($value)
+    public function retrieve()
     {
         return $this->value;
     }
