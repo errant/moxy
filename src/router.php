@@ -16,12 +16,15 @@ class Router extends \Klein\Klein implements Interfaces\Service {
 
     public function dispatch()
     {
+        $request = \Klein\Request::createFromGlobals();
+
         foreach($this->middleware as $middleware) {
-            if(!$middleware->dispatch(self::$router->request(),self::$router->response())) {
+            if(!$middleware->dispatch($request)) {
                 return;
             }
         }
-        parent::dispatch();
+
+        parent::dispatch($request, $response);
     }
 
     public function applyMiddleware($middleware)

@@ -5,6 +5,7 @@ class Dispatcher {
 
     protected $namespace;
     protected $container;
+    protected $middleware = array();
 
     public function __construct($namespace, $container)
     {
@@ -15,6 +16,11 @@ class Dispatcher {
     private function constructAction($request) 
     {
         return $request->action ?  $request->action . 'Action' : 'indexAction';
+    }
+
+    public function applyMiddleware($middleware)
+    {
+        $this->middleware[] = $middleware;
     }
 
     public function controllerRoute($request,$response) 
@@ -35,6 +41,12 @@ class Dispatcher {
             $action = 'code404';
         }
 
+        foreach($this->middleware as $middleware) {
+            if(!$middleware->dispatch($request,$response)) {
+                return;
+            }
+        }
+
         call_user_func(array($controller,$action));
 
         $response->send();
@@ -42,7 +54,9 @@ class Dispatcher {
 
     public function defaultRoute($request,$response)
     {
-        $request->controller = 'main';
+        if(!$request->controller) {
+          $request->controller = 'main';
+        }
 
         return $this->controllerRoute($request,$response);
     }
